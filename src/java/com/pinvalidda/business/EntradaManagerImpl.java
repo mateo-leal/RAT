@@ -20,7 +20,7 @@ public class EntradaManagerImpl {
         dao = new Dao_Entrada();
     }
 
-    public Entrada getEntrada(String idempleado) {
+    public Entrada getEntrada(Integer idempleado) {
 
         c = new Conexion().getCon();
         return dao.getEntrada(c, idempleado);

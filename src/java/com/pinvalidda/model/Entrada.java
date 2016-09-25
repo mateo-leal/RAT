@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Entrada {
 
-    private int id_empleado, cons;
+    private Integer id_empleado, cons;
     private Date hora_entrada, hora_salida, fecha;
 
     public Entrada() {
 
     }
     
-    public Entrada(int id_empleado, int cons, Date hora_entrada, Date hora_salida, Date fecha) {
+    public Entrada(Integer id_empleado, Integer cons, Date hora_entrada, Date hora_salida, Date fecha) {
         this.id_empleado = id_empleado;
         this.cons = cons;
         this.hora_entrada = hora_entrada;
@@ -19,11 +19,11 @@ public class Entrada {
         this.hora_salida = hora_salida;
     }
     
-    public int getId_empleado() {
+    public Integer getId_empleado() {
         return id_empleado;
     }
     
-    public int getCons() {
+    public Integer getCons() {
         return cons;
     }
     
@@ -40,11 +40,11 @@ public class Entrada {
     }
     
 
-    public void setId_empleado(int id_empleado) {
+    public void setId_empleado(Integer id_empleado) {
         this.id_empleado = id_empleado;
     }
 
-    public void setCons(int cons) {
+    public void setCons(Integer cons) {
         this.cons = cons;
     }
 

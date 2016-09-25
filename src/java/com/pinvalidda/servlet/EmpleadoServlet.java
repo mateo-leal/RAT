@@ -95,6 +95,15 @@ public class EmpleadoServlet extends HttpServlet {
             empVO.setEmail(email);
             empVO.setEstado(status);
             empVO.setId_cargo(carg);
+            try {
+                ne.getGuardarEmpleado(empVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                if (men.substring(0, 3).equals("Pro")) {
+                   limpiarCampos();
+                   request.setAttribute("datos", empVO);
+                }
+            }
         }
         
         if ("editar".equals(request.getParameter("action"))) {

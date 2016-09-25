@@ -16,8 +16,8 @@ public class EntradaServlet extends HttpServlet {
 
     public void limpiarCampos(){
 
-        eysVO.setId_empleado("");
-        eysVO.setCons("");
+        eysVO.setId_empleado(null);
+        eysVO.setCons(null);
         eysVO.setHora_E(null);
         eysVO.setHora_S(null);
         eysVO.setFecha_n(null);
@@ -55,8 +55,8 @@ public class EntradaServlet extends HttpServlet {
         } catch (Exception ex) {
         }
 
-        String idempleado = request.getParameter("txtID_Empleado");
-        String cons = request.getParameter("txtCons");
+        Integer idempleado = Integer.parseInt(request.getParameter("txtID_Empleado"));
+        Integer cons = Integer.parseInt(request.getParameter("txtCons"));
         
         String modulo = "registro-inandout.jsp";
         String men = "";

@@ -1,7 +1,7 @@
 package com.pinvalidda.servlet;
 
 import com.pinvalidda.model.Cargo;
-import com.pinvalidda.busincss.CargoManagerImpl;
+import com.pinvalidda.business.CargoManagerImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ public class CargoServlet extends HttpServlet {
 
     public void limpiarCampos(){
 
-        carVO.setId_cargo("");
+        carVO.setId_cargo(null);
         carVO.setNombre("");
         carVO.setSalario("");
         carVO.setEstado("");
@@ -25,7 +25,7 @@ public class CargoServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
 
-        String idcargo = request.getParameter("txtID_Cargo");
+        Integer idcargo = Integer.parseInt(request.getParameter("txtID_Cargo"));
         String name = request.getParameter("txtNombre");
         String salario = request.getParameter("txtSalario");
         String status = request.getParameter("cmbEstado");

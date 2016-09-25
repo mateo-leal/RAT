@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Dao_Entrada {
 
-    public Entrada getEntrada(Connection c, String idempleado) {
+    public Entrada getEntrada(Connection c, Integer idempleado) {
         Entrada u = new Entrada();
         try {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEntrada(idempleado));

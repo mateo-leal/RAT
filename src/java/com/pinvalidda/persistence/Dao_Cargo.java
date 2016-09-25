@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class Dao_Cargo {
 
-    public Cargo getCargo(Connection c, String idcargo) {
+    public Cargo getCargo(Connection c, Integer idcargo) {
         Cargo u = new Cargo();
         try {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getCargo(idcargo));

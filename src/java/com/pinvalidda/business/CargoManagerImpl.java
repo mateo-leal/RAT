@@ -19,7 +19,7 @@ public class CargoManagerImpl {
         dao = new Dao_Cargo();
     }
 
-    public Cargo getCargo(String idcargo) {
+    public Cargo getCargo(Integer idcargo) {
 
         c = new Conexion().getCon();
         return dao.getCargo(c, idcargo);
