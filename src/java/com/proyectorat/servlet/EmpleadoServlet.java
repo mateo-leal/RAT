@@ -3,7 +3,6 @@ package com.proyectorat.servlet;
 import com.proyectorat.model.Empleado;
 import com.proyectorat.manager.EmpleadoManagerImpl;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,31 +30,16 @@ public class EmpleadoServlet extends HttpServlet {
     protected void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date uDate;
-        String strDate = request.getParameter("dteFecha");
-        
-        try {
-            uDate = sdf.parse(strDate);
-            java.sql.Date fecha_n = new java.sql.Date(uDate.getTime());
-            if (empVO != null){
-                fecha_n = empVO.getFecha_n();
-            }
-            if ("grabar".equals(request.getParameter("action"))) {
-                empVO.setFecha_n(fecha_n);
-            }
-        } catch (Exception ex) {
-        }
 
-        Integer idempleado = Integer.parseInt(request.getParameter("txtID_Empleado"));
+        String idempleado = request.getParameter("txtID_Empleado");
         String name = request.getParameter("txtNombre");
         String last = request.getParameter("txtApellidos");
-        Integer tele = Integer.parseInt(request.getParameter("txtTelefono"));
+        String date = request.getParameter("dteFecha");
+        String tele = request.getParameter("txtTelefono");
         String dire = request.getParameter("txtDireccion");
         String email = request.getParameter("txtCorreo");
         String status = request.getParameter("cmbEstado");
-        Integer carg = Integer.parseInt(request.getParameter("cmbCargo"));
+        String carg = request.getParameter("cmbCargo");
         
         String modulo = "registro-employee.jsp";
         String men = "";
@@ -90,6 +74,7 @@ public class EmpleadoServlet extends HttpServlet {
             empVO.setId_empleado(idempleado);
             empVO.setNombre(name);
             empVO.setApellidos(last);
+            empVO.setFecha_n(date);
             empVO.setTelefono(tele);
             empVO.setDireccion(dire);
             empVO.setEmail(email);
@@ -99,9 +84,10 @@ public class EmpleadoServlet extends HttpServlet {
                 ne.getGuardarEmpleado(empVO);
             } catch (Exception e) {
                 men+=""+e.getMessage();
-                if (men.substring(0, 3).equals("Pro")) {
-                   limpiarCampos();
-                   request.setAttribute("datos", empVO);
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",empVO);
                 }
             }
         }
@@ -110,6 +96,7 @@ public class EmpleadoServlet extends HttpServlet {
             empVO.setId_empleado(idempleado);
             empVO.setNombre(name);
             empVO.setApellidos(last);
+            empVO.setFecha_n(date);
             empVO.setTelefono(tele);
             empVO.setDireccion(dire);
             empVO.setEmail(email);
@@ -119,9 +106,10 @@ public class EmpleadoServlet extends HttpServlet {
                 ne.getEditarEmpleado(empVO);
             } catch (Exception e) {
                 men+=""+e.getMessage();
-                if (men.substring(0, 3).equals("Pro")) {
-                   limpiarCampos();
-                   request.setAttribute("datos", empVO);
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",empVO);
                 }
             }
         }
@@ -136,8 +124,11 @@ public class EmpleadoServlet extends HttpServlet {
                 ne.getEliminarEmpleado(idempleado);
             }catch (Exception e){
                 men+=""+e.getMessage();
-                limpiarCampos();
-                request.setAttribute("datos", empVO);
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",empVO);
+                }
             }
             
         }

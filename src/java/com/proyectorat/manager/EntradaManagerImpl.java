@@ -20,16 +20,16 @@ public class EntradaManagerImpl {
         dao = new Dao_Entrada();
     }
 
-    public Entrada getEntrada(Integer idempleado) {
+    public Entrada getEntrada(String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getEntrada(c, idempleado);
+        return dao.getEntrada(c, Integer.parseInt(idempleado));
     }
     
-    public Entrada getEntrada_Cons(Integer cons, Integer emp) {
+    public Entrada getEntrada_Cons(String cons, String emp) {
 
         c = new Conexion().getCon();
-        return dao.getEntrada_Cons(c, cons, emp);
+        return dao.getEntrada_Cons(c, Integer.parseInt(cons), Integer.parseInt(emp));
     }
     
     public String getCons() {
@@ -45,8 +45,8 @@ public class EntradaManagerImpl {
     }
 
     public void getGuardarEntrada(Entrada u) throws Exception {
-        Integer emp, con;
-        Date fec, hoe, hos;
+        String emp, con;
+        String fec, hoe, hos;
         String mensaje;
         emp = u.getId_empleado();
         con = u.getCons();
@@ -81,12 +81,12 @@ public class EntradaManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getGuardarEntrada(c, emp, con, hoe, hos, fec);
+        mensaje = dao.getGuardarEntrada(c, Integer.parseInt(emp), Integer.parseInt(con), Date.valueOf(hoe), Date.valueOf(hos), Date.valueOf(fec));
     }
     
     public void getEditarEntrada(Entrada u) throws Exception {
-        Integer emp, con;
-        Date fec, hoe, hos;
+        String emp, con;
+        String fec, hoe, hos;
         String mensaje;
         emp = u.getId_empleado();
         con = u.getCons();
@@ -121,12 +121,12 @@ public class EntradaManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getEditarEntrada(c, emp, con, hoe, hos, fec);
+        mensaje = dao.getEditarEntrada(c, Integer.parseInt(emp), Integer.parseInt(con), Date.valueOf(hoe), Date.valueOf(hos), Date.valueOf(fec));
     }
     
-    public Entrada getEliminarEntrada(Integer cons, Integer idempleado) {
+    public Entrada getEliminarEntrada(String cons, String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarEntrada(c, cons, idempleado);
+        return dao.getEliminarEntrada(c, Integer.parseInt(cons), Integer.parseInt(idempleado));
     }
 }

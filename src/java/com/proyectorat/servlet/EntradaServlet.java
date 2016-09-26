@@ -18,9 +18,9 @@ public class EntradaServlet extends HttpServlet {
 
         eysVO.setId_empleado(null);
         eysVO.setCons(null);
-        eysVO.setHora_E(null);
-        eysVO.setHora_S(null);
-        eysVO.setFecha_n(null);
+        eysVO.setHora_entrada(null);
+        eysVO.setHora_salida(null);
+        eysVO.setFecha(null);
         
     }
     
@@ -37,20 +37,20 @@ public class EntradaServlet extends HttpServlet {
         
         try {
             uDate = sdf.parse(strDate);
-            java.sql.Date fecha_n = new java.sql.Date(uDate.getTime());
+            java.sql.Date fecha = new java.sql.Date(uDate.getTime());
             uDate = sdf2.parse(strHora_E);
-            java.util.Date hora_e = java.sql.Date(uDate.getTime());
+            java.sql.Date hora_e = new java.sql.Date(uDate.getTime());
             uDate = sdf2.parse(strHora_S);
-            java.util.Date hora_s = java.sql.Date(uDate.getTime());
+            java.sql.Date hora_s = new java.sql.Date(uDate.getTime());
             if (eysVO != null){
                 hora_e = eysVO.getHora_entrada();
                 hora_s = eysVO.getHora_salida();
-                fecha_n = eysVO.getFecha_n();
+                fecha = eysVO.getFecha();
             }
             if ("grabar".equals(request.getParameter("action"))) {
                 eysVO.setHora_entrada(hora_e);
                 eysVO.setHora_salida(hora_s);
-                eysVO.setFecha_n(fecha_n);
+                eysVO.setFecha(fecha);
             }
         } catch (Exception ex) {
         }
@@ -75,6 +75,12 @@ public class EntradaServlet extends HttpServlet {
                     request.setAttribute("datos", eysVO);
                     men = "El empleado "+ idempleado +" no se encuentra registrado";
                 }
+                if ("grabar".equals(request.getParameter("action"))) {
+                empVO.setFecha_n(fecha_n);
+            }
+            if ("editar".equals(request.getParameter("action"))) {
+                empVO.setFecha_n(fecha_n);
+            }
             } catch (Exception e) {
             }
         }
@@ -90,12 +96,9 @@ public class EntradaServlet extends HttpServlet {
         if ("guardar".equals(request.getParameter("action"))) {
             eysVO.setId_empleado(idempleado);
             eysVO.setCons(cons);
-            eysVO.setHora_E(last);
-            eysVO.setTelefono(tele);
-            eysVO.setDireccion(dire);
-            eysVO.setEmail(email);
-            eysVO.setEstado(status);
-            eysVO.setId_cargo(carg);
+            eysVO.setHora_entrada(hora_e);
+            eysVO.setHora_salida(hora_s);
+            eysVO.setFecha(fecha);
         }
         
         if ("editar".equals(request.getParameter("action"))) {

@@ -2,21 +2,21 @@ package com.proyectorat.model;
 
 public class Tipo {
 
-    private Integer id_actividad;
+    private String id_actividad;
     private String actividad, descripcion, estado;
 
     public Tipo() {
 
     }
 
-    public Tipo(Integer id_actividad, String actividad, String descripcion, String estado) {
+    public Tipo(String id_actividad, String actividad, String descripcion, String estado) {
         this.id_actividad = id_actividad;
         this.actividad = actividad;
         this.descripcion = descripcion;
         this.estado = estado;
     }
 
-    public Integer getId_actividad() {
+    public String getId_actividad() {
         return id_actividad;
     }
     
@@ -33,7 +33,7 @@ public class Tipo {
     }
     
 
-    public void setId_actividad(Integer id_actividad) {
+    public void setId_actividad(String id_actividad) {
         this.id_actividad = id_actividad;
     }
     

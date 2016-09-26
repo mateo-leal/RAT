@@ -25,11 +25,11 @@ public class Dao_Registro {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getRegistroA_E(idempleado));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setId_actividad(r.getInt(3));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getDate(5));
+                u.setFecha(r.getString(5));
                 u.setEstado(r.getString(6));
                 
             }
@@ -111,11 +111,11 @@ public class Dao_Registro {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Registro u = new Registro();
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setId_actividad(r.getInt(3));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getDate(5));
+                u.setFecha(r.getString(5));
                 u.setEstado(r.getString(6));
 
                 Listado.add(u);
@@ -138,11 +138,11 @@ public class Dao_Registro {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Registro u = new Registro();
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setId_actividad(r.getInt(3));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setId_actividad(r.getString(3));
                 u.setUsuario_creador(r.getString(4));
-                u.setFecha(r.getDate(5));
+                u.setFecha(r.getString(5));
                 u.setEstado(r.getString(6));
 
                 Listado.add(u);

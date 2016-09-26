@@ -25,11 +25,11 @@ public class Dao_Entrada {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEntrada(idempleado));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setHora_entrada(r.getDate(3));
-                u.setHora_salida(r.getDate(4));
-                u.setFecha(r.getDate(5));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setHora_entrada(r.getString(3));
+                u.setHora_salida(r.getString(4));
+                u.setFecha(r.getString(5));
                 
             }
         } catch (Exception e) {
@@ -48,11 +48,11 @@ public class Dao_Entrada {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEntrada_Cons(cons, emp));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setHora_entrada(r.getDate(3));
-                u.setHora_salida(r.getDate(4));
-                u.setFecha(r.getDate(5));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setHora_entrada(r.getString(3));
+                u.setHora_salida(r.getString(4));
+                u.setFecha(r.getString(5));
                 
             }
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class Dao_Entrada {
         return u;
     }
     
-    public String getGuardarEntrada(Connection c, int emp, int con, Date hoe, Date hos, Date fec) {
+    public String getGuardarEntrada(Connection c, Integer emp, Integer con, Date hoe, Date hos, Date fec) {
 
         String res = "";
         try {
@@ -115,7 +115,7 @@ public class Dao_Entrada {
         return res;
     }
 
-    public String getEditarEntrada(Connection c, int emp, int con, Date hoe, Date hos, Date fec) {
+    public String getEditarEntrada(Connection c, Integer emp, Integer con, Date hoe, Date hos, Date fec) {
 
         String res = "";
         try {
@@ -149,11 +149,11 @@ public class Dao_Entrada {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Entrada u = new Entrada();
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setHora_entrada(r.getDate(3));
-                u.setHora_salida(r.getDate(4));
-                u.setFecha(r.getDate(5));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setHora_entrada(r.getString(3));
+                u.setHora_salida(r.getString(4));
+                u.setFecha(r.getString(5));
 
                 Listado.add(u);
 
@@ -175,11 +175,11 @@ public class Dao_Entrada {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Entrada u = new Entrada();
-                u.setId_empleado(r.getInt(1));
-                u.setCons(r.getInt(2));
-                u.setHora_entrada(r.getDate(3));
-                u.setHora_salida(r.getDate(4));
-                u.setFecha(r.getDate(5));
+                u.setId_empleado(r.getString(1));
+                u.setCons(r.getString(2));
+                u.setHora_entrada(r.getString(3));
+                u.setHora_salida(r.getString(4));
+                u.setFecha(r.getString(5));
 
                 Listado.add(u);
 

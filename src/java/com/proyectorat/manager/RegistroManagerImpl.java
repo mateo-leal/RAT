@@ -20,10 +20,10 @@ public class RegistroManagerImpl {
         dao = new Dao_Registro();
     }
 
-    public Registro getRegistro(Integer idempleado) {
+    public Registro getRegistro(String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getRegistro(c, idempleado);
+        return dao.getRegistro(c, Integer.parseInt(idempleado));
     }
 
     public ArrayList<Registro> getListado() {
@@ -33,9 +33,9 @@ public class RegistroManagerImpl {
     }
 
     public void getGuardarRegistro(Registro u) throws Exception {
-        Integer emp, con, act;
+        String emp, con, act;
         String mensaje, usu, est;
-        Date fec;
+        String fec;
         emp = u.getId_empleado();
         con = u.getCons();
         act = u.getId_actividad();
@@ -71,13 +71,13 @@ public class RegistroManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getGuardarRegistro(c, emp, con, act, usu, fec, est);
+        mensaje = dao.getGuardarRegistro(c, Integer.parseInt(emp), Integer.parseInt(con), Integer.parseInt(act), usu, Date.valueOf(fec), est);
     }
     
     public void getEditarRegistro(Registro u) throws Exception {
-        Integer emp, con, act;
+        String emp, con, act;
         String mensaje, usu, est;
-        Date fec;
+        String fec;
         emp = u.getId_empleado();
         con = u.getCons();
         act = u.getId_actividad();
@@ -104,12 +104,12 @@ public class RegistroManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getEditarRegistro(c, emp, con, act, usu, fec, est);
+        mensaje = dao.getEditarRegistro(c, Integer.parseInt(emp), Integer.parseInt(con), Integer.parseInt(act), usu, Date.valueOf(fec), est);
     }
     
-    public Registro getEliminarRegistro(Integer idempleado) {
+    public Registro getEliminarRegistro(String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarRegistro(c, idempleado);
+        return dao.getEliminarRegistro(c, Integer.parseInt(idempleado));
     }
 }

@@ -2,7 +2,7 @@ package com.proyectorat.model;
 
 public class Cargo {
 
-    private Integer id_cargo;
+    private String id_cargo;
     private String nombre;
     private String salario;
     private String estado;
@@ -10,14 +10,14 @@ public class Cargo {
     public Cargo() {
     }
 
-    public Cargo(Integer id_cargo, String nombre, String salario, String estado) {
+    public Cargo(String id_cargo, String nombre, String salario, String estado) {
         this.id_cargo = id_cargo;
         this.nombre = nombre;
         this.salario = salario;
         this.estado = estado;
     }
 
-    public Integer getId_cargo() {
+    public String getId_cargo() {
         return id_cargo;
     }
 
@@ -33,7 +33,7 @@ public class Cargo {
         return estado;
     }
 
-    public void setId_cargo(Integer id_cargo) {
+    public void setId_cargo(String id_cargo) {
         this.id_cargo = id_cargo;
     }
 

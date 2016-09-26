@@ -24,7 +24,7 @@ public class Dao_Cargo {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getCargo(idcargo));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_cargo(r.getInt(1));
+                u.setId_cargo(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));
@@ -104,7 +104,7 @@ public class Dao_Cargo {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Cargo u = new Cargo();
-                u.setId_cargo(r.getInt(1));
+                u.setId_cargo(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));
@@ -129,7 +129,7 @@ public class Dao_Cargo {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Cargo u = new Cargo();
-                u.setId_cargo(r.getInt(1));
+                u.setId_cargo(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setSalario(r.getString(3));
                 u.setEstado(r.getString(4));

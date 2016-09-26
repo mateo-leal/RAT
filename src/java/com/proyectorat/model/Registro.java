@@ -1,18 +1,16 @@
 package com.proyectorat.model;
 
-import java.sql.Date;
-
 public class Registro {
 
-    private Integer id_empleado, cons, id_actividad;
+    private String id_empleado, cons, id_actividad;
     private String usuario_creador, estado;
-    private Date fecha;
+    private String fecha;
 
     public Registro() {
 
     }
 
-    public Registro(Integer id_empleado, Integer cons, Integer id_actividad, String usuario_creador, String estado, Date fecha) {
+    public Registro(String id_empleado, String cons, String id_actividad, String usuario_creador, String estado, String fecha) {
         this.id_empleado = id_empleado;
         this.cons = cons;
         this.id_actividad = id_actividad;
@@ -21,19 +19,19 @@ public class Registro {
         this.estado = estado;
     }
 
-    public Integer getId_empleado() {
+    public String getId_empleado() {
         return id_empleado;
     }
 
-    public Integer getCons() {
+    public String getCons() {
         return cons;
     }
 
-    public Integer getId_actividad() {
+    public String getId_actividad() {
         return id_actividad;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -46,19 +44,19 @@ public class Registro {
     }
    
 
-    public void setId_empleado(Integer id_empleado) {
+    public void setId_empleado(String id_empleado) {
         this.id_empleado = id_empleado;
     }
 
-    public void setCons(Integer cons) {
+    public void setCons(String cons) {
         this.cons = cons;
     }
 
-    public void setId_actividad(Integer id_actividad) {
+    public void setId_actividad(String id_actividad) {
         this.id_actividad = id_actividad;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

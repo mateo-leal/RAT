@@ -1,18 +1,16 @@
 package com.proyectorat.model;
 
-import java.sql.Date;
-
 public class Empleado {
 
-    private Integer id_empleado, telefono, id_cargo;
+    private String id_empleado, telefono, id_cargo;
     private String nombre, apellidos, direccion, email, estado;
-    private Date fecha_n;
+    private String fecha_n;
 
     public Empleado() {
 
     }
 
-    public Empleado(Integer id_empleado, String nombre, String apellidos, Integer telefono, String direccion, String email, String estado, Integer id_cargo, Date fecha_n) {
+    public Empleado(String id_empleado, String nombre, String apellidos, String telefono, String direccion, String email, String estado, String id_cargo, String fecha_n) {
         this.id_empleado = id_empleado;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -24,7 +22,7 @@ public class Empleado {
         this.id_cargo = id_cargo;
     }
 
-    public Integer getId_empleado() {
+    public String getId_empleado() {
         return id_empleado;
     }
 
@@ -36,7 +34,7 @@ public class Empleado {
         return apellidos;
     }
 
-    public Date getFecha_n() {
+    public String getFecha_n() {
         return fecha_n;
     }
 
@@ -44,7 +42,7 @@ public class Empleado {
         return direccion;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -56,12 +54,12 @@ public class Empleado {
         return estado;
     }
 
-    public Integer getId_cargo() {
+    public String getId_cargo() {
         return id_cargo;
     }
 
 
-    public void setId_empleado(Integer id_empleado) {
+    public void setId_empleado(String id_empleado) {
         this.id_empleado = id_empleado;
     }
 
@@ -73,7 +71,7 @@ public class Empleado {
         this.apellidos = apellidos;
     }
 
-    public void setFecha_n(Date fecha_n) {
+    public void setFecha_n(String fecha_n) {
         this.fecha_n = fecha_n;
     }
 
@@ -81,7 +79,7 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -93,7 +91,7 @@ public class Empleado {
         this.estado = estado;
     }
 
-    public void setId_cargo(Integer id_cargo) {
+    public void setId_cargo(String id_cargo) {
         this.id_cargo = id_cargo;
     }
 }

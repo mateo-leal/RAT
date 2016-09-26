@@ -24,7 +24,7 @@ public class Dao_Tipo {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getTipoA(idactividad));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_actividad(r.getInt(1));
+                u.setId_actividad(r.getString(1));
                 u.setActividad(r.getString(2));
                 u.setDescripcion(r.getString(3));
                 u.setEstado(r.getString(4));
@@ -104,7 +104,7 @@ public class Dao_Tipo {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Tipo u = new Tipo();
-                u.setId_actividad(r.getInt(1));
+                u.setId_actividad(r.getString(1));
                 u.setActividad(r.getString(2));
                 u.setDescripcion(r.getString(3));
                 u.setEstado(r.getString(4));
@@ -129,7 +129,7 @@ public class Dao_Tipo {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Tipo u = new Tipo();
-                u.setId_actividad(r.getInt(1));
+                u.setId_actividad(r.getString(1));
                 u.setActividad(r.getString(2));
                 u.setDescripcion(r.getString(3));
                 u.setEstado(r.getString(4));

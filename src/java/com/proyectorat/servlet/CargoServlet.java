@@ -25,7 +25,7 @@ public class CargoServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
 
-        Integer idcargo = Integer.parseInt(request.getParameter("txtID_Cargo"));
+        String idcargo = request.getParameter("txtID_Cargo");
         String name = request.getParameter("txtNombre");
         String salario = request.getParameter("txtSalario");
         String status = request.getParameter("cmbEstado");

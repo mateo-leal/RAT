@@ -25,15 +25,15 @@ public class Dao_Empleado {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEmpleado(idempleado));
             ResultSet r = smt.executeQuery();
             while (r.next()) {
-                u.setId_empleado(r.getInt(1));
+                u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getDate(4));
-                u.setTelefono(r.getInt(5));
+                u.setFecha_n(r.getString(4));
+                u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
-                u.setId_cargo(r.getInt(9));
+                u.setId_cargo(r.getString(9));
                 
             }
         } catch (Exception e) {
@@ -120,15 +120,15 @@ public class Dao_Empleado {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Empleado u = new Empleado();
-                u.setId_empleado(r.getInt(1));
+                u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getDate(4));
-                u.setTelefono(r.getInt(5));
+                u.setFecha_n(r.getString(4));
+                u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
-                u.setId_cargo(r.getInt(9));
+                u.setId_cargo(r.getString(9));
 
                 Listado.add(u);
 
@@ -150,15 +150,15 @@ public class Dao_Empleado {
             ResultSet r = stm.executeQuery();
             while (r.next()) {
                 Empleado u = new Empleado();
-                u.setId_empleado(r.getInt(1));
+                u.setId_empleado(r.getString(1));
                 u.setNombre(r.getString(2));
                 u.setApellidos(r.getString(3));
-                u.setFecha_n(r.getDate(4));
-                u.setTelefono(r.getInt(5));
+                u.setFecha_n(r.getString(4));
+                u.setTelefono(r.getString(5));
                 u.setDireccion(r.getString(6));
                 u.setEmail(r.getString(7));
                 u.setEstado(r.getString(8));
-                u.setId_cargo(r.getInt(9));
+                u.setId_cargo(r.getString(9));
 
                 Listado.add(u);
 

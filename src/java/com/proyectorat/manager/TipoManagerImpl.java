@@ -19,10 +19,10 @@ public class TipoManagerImpl {
         dao = new Dao_Tipo();
     }
 
-    public Tipo getTipo(Integer idactividad) {
+    public Tipo getTipo(String idactividad) {
 
         c = new Conexion().getCon();
-        return dao.getTipoA(c, idactividad);
+        return dao.getTipoA(c, Integer.parseInt(idactividad));
     }
 
     public ArrayList<Tipo> getListado() {
@@ -32,7 +32,7 @@ public class TipoManagerImpl {
     }
 
     public void getGuardarTipo(Tipo u) throws Exception {
-        Integer ida;
+        String ida;
         String mensaje, act, des, est;
         ida = u.getId_actividad();
         act = u.getActividad();
@@ -64,11 +64,11 @@ public class TipoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getGuardarTipo(c, ida, act, des, est);
+        mensaje = dao.getGuardarTipo(c, Integer.parseInt(ida), act, des, est);
     }
     
     public void getEditarTipo(Tipo u) throws Exception {
-        Integer ida;
+        String ida;
         String mensaje, act, des, est;
         ida = u.getId_actividad();
         act = u.getActividad();
@@ -97,12 +97,12 @@ public class TipoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getEditarTipo(c, ida, act, des, est);
+        mensaje = dao.getEditarTipo(c, Integer.parseInt(ida), act, des, est);
     }
     
-    public Tipo getEliminarTipo(Integer idactividad) {
+    public Tipo getEliminarTipo(String idactividad) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarTipo(c, idactividad);
+        return dao.getEliminarTipo(c, Integer.parseInt(idactividad));
     }
 }

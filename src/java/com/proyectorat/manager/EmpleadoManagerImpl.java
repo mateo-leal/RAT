@@ -20,10 +20,10 @@ public class EmpleadoManagerImpl {
         dao = new Dao_Empleado();
     }
 
-    public Empleado getEmpleado(Integer idempleado) {
+    public Empleado getEmpleado(String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getEmpleado(c, idempleado);
+        return dao.getEmpleado(c, Integer.parseInt(idempleado));
     }
 
     public ArrayList<Empleado> getListado() {
@@ -33,9 +33,12 @@ public class EmpleadoManagerImpl {
     }
 
     public void getGuardarEmpleado(Empleado u) throws Exception {
-        Integer emp, tel, car;
+        
+        
+        
+        String emp, tel, car;
         String mensaje, nom, ape, dir, cor, est;
-        Date fec;
+        String fec;
         emp = u.getId_empleado();
         nom = u.getNombre();
         ape = u.getApellidos();
@@ -77,13 +80,13 @@ public class EmpleadoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getGuardarEmpleado(c, emp, nom, ape, fec, tel, dir, cor, est, car);
+        mensaje = dao.getGuardarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
     }
     
     public void getEditarEmpleado(Empleado u) throws Exception {
-        Integer emp, tel, car;
+        String emp, tel, car;
         String mensaje, nom, ape, dir, cor, est;
-        Date fec;
+        String fec;
         emp = u.getId_empleado();
         nom = u.getNombre();
         ape = u.getApellidos();
@@ -123,12 +126,13 @@ public class EmpleadoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getEditarEmpleado(c, emp, nom, ape, fec, tel, dir, cor, est, car);
+        mensaje = dao.getEditarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
     }
     
-    public Empleado getEliminarEmpleado(Integer idempleado) {
+    public Empleado getEliminarEmpleado(String idempleado) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarEmpleado(c, idempleado);
+        return dao.getEliminarEmpleado(c, Integer.parseInt(idempleado));
     }
+    
 }

@@ -19,10 +19,10 @@ public class CargoManagerImpl {
         dao = new Dao_Cargo();
     }
 
-    public Cargo getCargo(Integer idcargo) {
+    public Cargo getCargo(String idcargo) {
 
         c = new Conexion().getCon();
-        return dao.getCargo(c, idcargo);
+        return dao.getCargo(c, Integer.parseInt(idcargo));
     }
 
     public ArrayList<Cargo> getListado() {
@@ -32,7 +32,7 @@ public class CargoManagerImpl {
     }
 
     public void getGuardarCargo(Cargo u) throws Exception {
-        Integer car;
+        String car;
         String mensaje, nom, sal, est;
         car = u.getId_cargo();
         nom = u.getNombre();
@@ -67,11 +67,11 @@ public class CargoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getGuardarCargo(c, car, nom, sal, est);
+        mensaje = dao.getGuardarCargo(c, Integer.parseInt(car), nom, sal, est);
     }
     
     public void getEditarCargo(Cargo u) throws Exception {
-        Integer car;
+        String car;
         String mensaje, nom, sal, est;
         car = u.getId_cargo();
         nom = u.getNombre();
@@ -104,12 +104,12 @@ public class CargoManagerImpl {
         
         c= new Conexion().getCon();
         
-        mensaje = dao.getEditarCargo(c, car, nom, sal, est);
+        mensaje = dao.getEditarCargo(c, Integer.parseInt(car), nom, sal, est);
     }
     
-    public Cargo getEliminarCargo(Integer idcargo) {
+    public Cargo getEliminarCargo(String idcargo) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarCargo(c, idcargo);
+        return dao.getEliminarCargo(c, Integer.parseInt(idcargo));
     }
 }
