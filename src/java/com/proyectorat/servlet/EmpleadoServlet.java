@@ -34,8 +34,8 @@ public class EmpleadoServlet extends HttpServlet {
         String idempleado = request.getParameter("txtID_Empleado");
         String name = request.getParameter("txtNombre");
         String last = request.getParameter("txtApellidos");
-            String date = request.getParameter("dteFecha");
-            String tele = request.getParameter("txtTelefono");
+        String date = request.getParameter("dteFecha");
+        String tele = request.getParameter("txtTelefono");
         String dire = request.getParameter("txtDireccion");
         String email = request.getParameter("txtCorreo");
         String status = request.getParameter("cmbEstado");

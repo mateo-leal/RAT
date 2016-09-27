@@ -1,9 +1,8 @@
 package com.proyectorat.servlet;
 
-import com.proyectorat.model.Empleado;
-import com.pinvalidda.business.EmpleadoManagerImpl;
+import com.proyectorat.model.Registro;
+import com.proyectorat.manager.RegistroManagerImpl;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,53 +10,31 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegistroServlet extends HttpServlet {
     
-    Empleado empVO = new Empleado();
-    EmpleadoManagerImpl ne = new EmpleadoManagerImpl();
+    Registro regVO = new Registro();
+    RegistroManagerImpl nr = new RegistroManagerImpl();
 
     public void limpiarCampos(){
 
-        empVO.setId_empleado("");
-        empVO.setNombre("");
-        empVO.setApellidos("");
-        empVO.setFecha_n(null);
-        empVO.setTelefono("");
-        empVO.setDireccion("");
-        empVO.setEmail("");
-        empVO.setEstado("");
-        empVO.setId_cargo("");
-        
+        regVO.setId_empleado("");
+        regVO.setCons(nr.getCons());
+        regVO.setId_actividad("");
+        regVO.setUsuario_creador("");
+        regVO.setFecha("");
+        regVO.setEstado("");
     }
     
     protected void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date uDate;
-        String strDate = request.getParameter("dteFecha");
-        
-        try {
-            uDate = sdf.parse(strDate);
-            java.sql.Date fecha_n = new java.sql.Date(uDate.getTime());
-            if (empVO != null){
-                fecha_n = empVO.getFecha_n();
-            }
-            if ("grabar".equals(request.getParameter("action"))) {
-                empVO.setFecha_n(fecha_n);
-            }
-        } catch (Exception ex) {
-        }
 
-        String idempleado = request.getParameter("txtID_Empleado");
-        String name = request.getParameter("txtNombre");
-        String last = request.getParameter("txtApellidos");
-        String tele = request.getParameter("txtTelefono");
-        String dire = request.getParameter("txtDireccion");
-        String email = request.getParameter("txtCorreo");
-        String status = request.getParameter("cmbEstado");
-        String carg = request.getParameter("cmbCargo");
+        String idEmpleado = request.getParameter("txtIdEmpleado");
+        String cons = request.getParameter("txtCons");
+        String idActividad = request.getParameter("txtIdActividad");
+        String usuarioCreador = request.getParameter("txtUsuario");
+        String fecha = request.getParameter("dteFecha");
+        String estado = request.getParameter("cmbEstado");
         
-        String modulo = "registro-employee.jsp";
+        String modulo = "registro-activities.jsp";
         String men = "";
         
         request.setAttribute("mensajes", null);
@@ -66,13 +43,13 @@ public class RegistroServlet extends HttpServlet {
         
         if ("buscar".equals(request.getParameter("action"))) {
             try {
-                empVO = ne.getEmpleado(idempleado);
-                if (!"*".equals(empVO.getId_empleado())) {
-                    request.setAttribute("datos", empVO);
+                regVO = nr.getRegistro(idEmpleado);
+                if (!"*".equals(regVO.getId_empleado())) {
+                    request.setAttribute("datos", regVO);
                 } else {
                     limpiarCampos();
-                    request.setAttribute("datos", empVO);
-                    men = "El empleado "+ idempleado +" no se encuentra registrado";
+                    request.setAttribute("datos", regVO);
+                    men = "El empleado "+ idEmpleado +" no se encuentra registrado";
                 }
             } catch (Exception e) {
             }
@@ -80,34 +57,66 @@ public class RegistroServlet extends HttpServlet {
         
         if ("todos".equals(request.getParameter("action"))) {
             try {
-                request.setAttribute("listado", ne.getListado());
+                request.setAttribute("listado", nr.getListado());
             } catch (Exception e) {
                 request.setAttribute("listado", null);
             }
         }
         
         if ("guardar".equals(request.getParameter("action"))) {
-            empVO.setId_empleado(idempleado);
-            empVO.setNombre(name);
-            empVO.setApellidos(last);
-            empVO.setTelefono(tele);
-            empVO.setDireccion(dire);
-            empVO.setEmail(email);
-            empVO.setEstado(status);
-            empVO.setId_cargo(carg);
+            regVO.setId_empleado(idEmpleado);
+            regVO.setCons(nr.getCons());
+            regVO.setId_actividad(idActividad);
+            regVO.setUsuario_creador(usuarioCreador);
+            regVO.setFecha(fecha);
+            regVO.setEstado(estado);
+            try {
+                nr.getGuardarRegistro(regVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",regVO);
+                }
+            }
         }
         
         if ("editar".equals(request.getParameter("action"))) {
-            men = "implementar editar";
+            regVO.setId_empleado(idEmpleado);
+            regVO.setCons(nr.getCons());
+            regVO.setId_actividad(idActividad);
+            regVO.setUsuario_creador(usuarioCreador);
+            regVO.setFecha(fecha);
+            regVO.setEstado(estado);
+            try {
+                nr.getEditarRegistro(regVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",regVO);
+                }
+            }
         }
         
         if ("cancelar".equals(request.getParameter("action"))) {
             limpiarCampos();
-            request.setAttribute("datos", empVO);
+            request.setAttribute("datos", regVO);
         }
         
         if ("eliminar".equals(request.getParameter("action"))) {
-            men = "implementar eliminar";
+            try{
+                nr.getEliminarRegistro(idEmpleado);
+            }catch (Exception e){
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",regVO);
+                }
+            }
         }
         
         request.setAttribute("mensajes", men);

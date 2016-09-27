@@ -1,9 +1,8 @@
 package com.proyectorat.servlet;
 
-import com.proyectorat.model.Empleado;
-import com.pinvalidda.business.EmpleadoManagerImpl;
+import com.proyectorat.model.Tipo;
+import com.proyectorat.manager.TipoManagerImpl;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,53 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 
 public class TipoServlet extends HttpServlet {
     
-    Empleado empVO = new Empleado();
-    EmpleadoManagerImpl ne = new EmpleadoManagerImpl();
+    Tipo tipoVO = new Tipo();
+    TipoManagerImpl ne = new TipoManagerImpl();
 
     public void limpiarCampos(){
 
-        empVO.setId_empleado("");
-        empVO.setNombre("");
-        empVO.setApellidos("");
-        empVO.setFecha_n(null);
-        empVO.setTelefono("");
-        empVO.setDireccion("");
-        empVO.setEmail("");
-        empVO.setEstado("");
-        empVO.setId_cargo("");
+        tipoVO.setId_actividad("");
+        tipoVO.setActividad("");
+        tipoVO.setDescripcion("");
+        tipoVO.setEstado("");
+
         
     }
     
     protected void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date uDate;
-        String strDate = request.getParameter("dteFecha");
-        
-        try {
-            uDate = sdf.parse(strDate);
-            java.sql.Date fecha_n = new java.sql.Date(uDate.getTime());
-            if (empVO != null){
-                fecha_n = empVO.getFecha_n();
-            }
-            if ("grabar".equals(request.getParameter("action"))) {
-                empVO.setFecha_n(fecha_n);
-            }
-        } catch (Exception ex) {
-        }
 
-        String idempleado = request.getParameter("txtID_Empleado");
-        String name = request.getParameter("txtNombre");
-        String last = request.getParameter("txtApellidos");
-        String tele = request.getParameter("txtTelefono");
-        String dire = request.getParameter("txtDireccion");
-        String email = request.getParameter("txtCorreo");
-        String status = request.getParameter("cmbEstado");
-        String carg = request.getParameter("cmbCargo");
-        
-        String modulo = "registro-employee.jsp";
+        String idActividad = request.getParameter("txtIdActividad");
+        String actividad = request.getParameter("txtActividad");
+        String descripcion = request.getParameter("txtDescripcion");
+        String estado = request.getParameter("txtEstado");
+         
+        String modulo = "registro-types.jsp";
         String men = "";
         
         request.setAttribute("mensajes", null);
@@ -66,13 +41,13 @@ public class TipoServlet extends HttpServlet {
         
         if ("buscar".equals(request.getParameter("action"))) {
             try {
-                empVO = ne.getEmpleado(idempleado);
-                if (!"*".equals(empVO.getId_empleado())) {
-                    request.setAttribute("datos", empVO);
+                tipoVO = ne.getTipo(idActividad);
+                if (!"*".equals(tipoVO.getId_actividad())) {
+                    request.setAttribute("datos", tipoVO);
                 } else {
                     limpiarCampos();
-                    request.setAttribute("datos", empVO);
-                    men = "El empleado "+ idempleado +" no se encuentra registrado";
+                    request.setAttribute("datos", tipoVO);
+                    men = "El tipo de actividad "+ idActividad +" no se encuentra registrado";
                 }
             } catch (Exception e) {
             }
@@ -87,27 +62,55 @@ public class TipoServlet extends HttpServlet {
         }
         
         if ("guardar".equals(request.getParameter("action"))) {
-            empVO.setId_empleado(idempleado);
-            empVO.setNombre(name);
-            empVO.setApellidos(last);
-            empVO.setTelefono(tele);
-            empVO.setDireccion(dire);
-            empVO.setEmail(email);
-            empVO.setEstado(status);
-            empVO.setId_cargo(carg);
+            tipoVO.setId_actividad(idActividad);
+            tipoVO.setActividad(actividad);
+            tipoVO.setDescripcion(descripcion);
+            tipoVO.setEstado(estado);
+            try {
+                ne.getGuardarTipo(tipoVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",tipoVO);
+                }
+            }
         }
         
         if ("editar".equals(request.getParameter("action"))) {
-            men = "implementar editar";
+            tipoVO.setId_actividad(idActividad);
+            tipoVO.setActividad(actividad);
+            tipoVO.setDescripcion(descripcion);
+            tipoVO.setEstado(estado);
+            try {
+                ne.getEditarTipo(tipoVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",tipoVO);
+                }
+            }
         }
         
         if ("cancelar".equals(request.getParameter("action"))) {
             limpiarCampos();
-            request.setAttribute("datos", empVO);
+            request.setAttribute("datos", tipoVO);
         }
         
         if ("eliminar".equals(request.getParameter("action"))) {
-            men = "implementar eliminar";
+            try{
+                ne.getEliminarTipo(idActividad);
+            }catch (Exception e){
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",tipoVO);
+                }
+            }
         }
         
         request.setAttribute("mensajes", men);
