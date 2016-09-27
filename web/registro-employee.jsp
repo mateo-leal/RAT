@@ -60,7 +60,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <form role="form" method="post" action="/EmpleadoServlet">
+                                            <form role="form" method="post" action="EmpleadoServlet">
 
                                                 <div class="form-group">
                                                     <input class="form-control" placeholder="ID del empleado" name="txtID_Empleado" value="<%=idempleado!=null ? idempleado:""%>" size="4">
@@ -97,6 +97,7 @@
                                                         <%if(LC!=null){%>
                                                             <%for(Cargo ca:LC){%>
                                                                 <option value="<%=ca.getId_cargo()%>"><%=ca.getNombre()%></option>
+                                                                <option value="prueba">Prueba</option>  
                                                             <%}%>
                                                         <%}%>
                                                     </select>

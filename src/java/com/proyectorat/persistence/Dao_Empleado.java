@@ -87,6 +87,8 @@ public class Dao_Empleado {
         String res = "";
         try {
             PreparedStatement stm = c.prepareStatement(SQL_Helpers.getActualizarE());
+           /*     return "UPDATE tblempleado SET nombre=?, apellidos=?, fecha_n=?, telefono=?, direccion=?, email=?, estado=?, id_cargo=? WHERE id_empleado=?";
+ */
             stm.setInt(9, emp);
             stm.setInt(1, emp);
             stm.setString(2, nom);
@@ -98,16 +100,18 @@ public class Dao_Empleado {
             stm.setString(8, est);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Empleado " + emp + " actualizado");
+                res = "Empleado " + emp + " actualizado";
+                
             } else {
-                JOptionPane.showMessageDialog(null, "Empleado " + emp + " no actualizado", "Error", JOptionPane.ERROR_MESSAGE);
+               res= "Empleado " + emp + " no actualizado";
             }
         } catch (SQLException | HeadlessException e) {
+            e.printStackTrace();
         } finally {
             try {
                 c.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getCause(), "Error", JOptionPane.ERROR_MESSAGE);
+                res = "" + e.getCause();
             }
         }
         return res;

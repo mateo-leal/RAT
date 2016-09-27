@@ -96,19 +96,19 @@
                         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Iniciar sesión</button>
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <form name="loginform" id="loginform" action="" method="POST">
+                                <form name="loginform" id="loginform" action="LoginServlet" method="POST">
                                     <div class="login-form">
                                         <div class="form-group log-status ">
-                                            <input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" name="usuario" required>
+                                            <input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" name="user" required>
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <div class="form-group log-status">
-                                            <input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña" name="pass" required>
+                                            <input type="password" class="form-control" name="password" id="clave" placeholder="Contraseña" required>
                                             <i class="fa fa-lock"></i>
                                         </div>
                                         <a class="link2" href="registro.php">¿No tienes cuenta?</a>
                                         <a class="link" href="#">¿Olvidaste tu contraseña?</a>
-                                        <button type="submit" name="login" class="btn btn-primary log-btn" >Iniciar sesión</button>
+                                        <button type="submit" value="Enviar" name="login" class="btn btn-primary log-btn" >Iniciar sesión</button>
                                         <button type="button" class="btn btn-danger cls-btn" data-dismiss="modal">Cerrar</button>
                                     </div>
                                 </form>

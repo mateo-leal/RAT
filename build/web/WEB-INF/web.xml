@@ -5,9 +5,17 @@
         <servlet-name>EmpleadoServlet</servlet-name>
         <servlet-class>com.proyectorat.servlet.EmpleadoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmpleadoServlet</servlet-name>
         <url-pattern>/EmpleadoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,7 +3,6 @@ package com.proyectorat.servlet;
 import com.proyectorat.model.Entrada;
 import com.proyectorat.manager.EntradaManagerImpl;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,35 +27,11 @@ public class EntradaServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-        java.util.Date uDate;
-        String strDate = request.getParameter("dteFecha");
+        String idempleado = request.getParameter("txtID_Empleado");
+        String consecutivo =request.getParameter("");
+        String date = request.getParameter("dteFecha");
         String strHora_E = request.getParameter("dteHora_E");
         String strHora_S = request.getParameter("dteHora_S");
-        
-        try {
-            uDate = sdf.parse(strDate);
-            java.sql.Date fecha = new java.sql.Date(uDate.getTime());
-            uDate = sdf2.parse(strHora_E);
-            java.sql.Date hora_e = new java.sql.Date(uDate.getTime());
-            uDate = sdf2.parse(strHora_S);
-            java.sql.Date hora_s = new java.sql.Date(uDate.getTime());
-            if (eysVO != null){
-                hora_e = eysVO.getHora_entrada();
-                hora_s = eysVO.getHora_salida();
-                fecha = eysVO.getFecha();
-            }
-            if ("grabar".equals(request.getParameter("action"))) {
-                eysVO.setHora_entrada(hora_e);
-                eysVO.setHora_salida(hora_s);
-                eysVO.setFecha(fecha);
-            }
-        } catch (Exception ex) {
-        }
-
-        Integer idempleado = Integer.parseInt(request.getParameter("txtID_Empleado"));
-        Integer cons = Integer.parseInt(request.getParameter("txtCons"));
         
         String modulo = "registro-inandout.jsp";
         String men = "";
@@ -67,20 +42,15 @@ public class EntradaServlet extends HttpServlet {
         
         if ("buscar".equals(request.getParameter("action"))) {
             try {
-                eysVO = ne.getEntrada(idempleado);
+                eysVO = ne.getEntrada(consecutivo);
                 if (!"*".equals(eysVO.getId_empleado())) {
                     request.setAttribute("datos", eysVO);
                 } else {
                     limpiarCampos();
                     request.setAttribute("datos", eysVO);
-                    men = "El empleado "+ idempleado +" no se encuentra registrado";
+                    men = "El empleado "+ consecutivo +" no se encuentra registrado";
                 }
-                if ("grabar".equals(request.getParameter("action"))) {
-                empVO.setFecha_n(fecha_n);
-            }
-            if ("editar".equals(request.getParameter("action"))) {
-                empVO.setFecha_n(fecha_n);
-            }
+                
             } catch (Exception e) {
             }
         }
@@ -94,15 +64,41 @@ public class EntradaServlet extends HttpServlet {
         }
         
         if ("guardar".equals(request.getParameter("action"))) {
+            eysVO.setCons(consecutivo);
             eysVO.setId_empleado(idempleado);
-            eysVO.setCons(cons);
-            eysVO.setHora_entrada(hora_e);
-            eysVO.setHora_salida(hora_s);
-            eysVO.setFecha(fecha);
+            eysVO.setFecha(date);
+            eysVO.setHora_entrada(strHora_E);
+            eysVO.setHora_salida(strHora_S);
+            
+            try {
+                ne.getGuardarEntrada(eysVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",eysVO);
+                }
+            }
         }
         
         if ("editar".equals(request.getParameter("action"))) {
-            men = "implementar editar";
+            eysVO.setCons(consecutivo);
+            eysVO.setId_empleado(idempleado);
+            eysVO.setFecha(date);
+            eysVO.setHora_entrada(strHora_E);
+            eysVO.setHora_salida(strHora_S);
+            
+            try {
+                ne.getEditarEntrada(eysVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",eysVO);
+                }
+            }
         }
         
         if ("cancelar".equals(request.getParameter("action"))) {
@@ -111,7 +107,18 @@ public class EntradaServlet extends HttpServlet {
         }
         
         if ("eliminar".equals(request.getParameter("action"))) {
-            men = "implementar eliminar";
+            try{
+                ne.getEliminarEntrada(consecutivo,idempleado);
+                        
+            }catch (Exception e){
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",eysVO);
+                }
+            }
+            
         }
         
         request.setAttribute("mensajes", men);
@@ -156,5 +163,5 @@ public class EntradaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }
