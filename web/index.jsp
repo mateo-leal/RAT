@@ -6,8 +6,8 @@
 
 <%@page import="java.util.*" session="true"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.pinvalidda.model.Usuario"%>
-<%@page import="com.pinvalidda.business.UsuarioManagerImpl"%>
+<%@page import="com.proyectorat.model.Usuario"%>
+<%@page import="com.proyectorat.manager.UsuarioManagerImpl"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
