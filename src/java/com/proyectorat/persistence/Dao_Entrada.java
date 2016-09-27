@@ -95,16 +95,16 @@ public class Dao_Entrada {
             stm.setDate(5, fec);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Registro " + con + " añadido");
+                res = "Registro " + con + " añadido";
             } else {
-                JOptionPane.showMessageDialog(null, "Registro " + con + " no añadido", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Registro " + con + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
             
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
-                JOptionPane.showMessageDialog(null, "El registro " + con + " ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "El registro " + con + " ya existe.";
             }
         } finally {
             try {
@@ -127,16 +127,16 @@ public class Dao_Entrada {
             stm.setDate(3, fec);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Registro " + con + " actualizado");
+                res = "Registro " + con + " actualizado";
             } else {
-                JOptionPane.showMessageDialog(null, "Registro " + con + " no actualizado", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Registro " + con + " no actualizado";
             }
         } catch (SQLException | HeadlessException e) {
         } finally {
             try {
                 c.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getCause(), "Error", JOptionPane.ERROR_MESSAGE);
+                res =  "" + e.getCause();
             }
         }
         return res;

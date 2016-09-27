@@ -60,10 +60,6 @@ public class Registro {
         this.fecha = fecha;
     }
 
-    public void setDireccion(String direccion) {
-        this.estado = direccion;
-    }
-
     public void setUsuario_creador(String usuario_creador) {
         this.usuario_creador = usuario_creador;
     }

@@ -33,8 +33,6 @@ public class Conexion {
             System.out.println("InstantiationException" + e2.getMessage());
         } catch (IllegalAccessException e3) {
             System.out.println("IllegalAccessException" + e3.getMessage());
-        } catch (Exception e4) {
-            System.out.println("Exception" + e4.getMessage());
         }
     }
 

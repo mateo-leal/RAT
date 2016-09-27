@@ -43,6 +43,24 @@ public class Dao_Registro {
         return u;
     }
 
+    public String getCons (Connection c, String tabla, String campo, int Longitud) {
+        String u = "1000";
+        try {
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getConsectivo(tabla, campo, Longitud));
+            ResultSet r = smt.executeQuery();
+            while (r.next()) {
+                u=r.getString(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                c.close();
+            } catch (Exception e) {
+            }
+        }
+        return u;
+    }
+    
     public String getGuardarRegistro(Connection c, int emp, int con, int act, String usu, Date fec, String est) {
 
         String res = "";
@@ -56,16 +74,16 @@ public class Dao_Registro {
             stm.setString(6, est);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Registro " + act + "añadido");
+                res = "Registro " + act + "añadido";
             } else {
-                JOptionPane.showMessageDialog(null, "Registro " + act + " no añadido", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Registro " + act + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
             
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
-                JOptionPane.showMessageDialog(null, "El registro " + act + "ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "El registro " + act + "ya existe.";
             }
         } finally {
             try {
@@ -89,16 +107,16 @@ public class Dao_Registro {
             stm.setString(5, est);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Registro " + con + "actualizado");
+                res = "Registro " + con + "actualizado";
             } else {
-                JOptionPane.showMessageDialog(null, "Registro " + con + " no actualizado", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Registro " + con + " no actualizado";
             }
         } catch (SQLException | HeadlessException e) {
         } finally {
             try {
                 c.close();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getCause(), "Error", JOptionPane.ERROR_MESSAGE);
+                res = "" + e.getCause();
             }
         }
         return res;
