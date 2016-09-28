@@ -1,11 +1,12 @@
+
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.proyectorat.model.Entrada"%>
-<%@page import="com.proyectorat.manager.EntradaManagerImpl"%>
+<%@page import="com.proyectorat.model.Cargo"%>
+<%@page import="com.proyectorat.manager.CargoManagerImpl"%>
 <%
-    EntradaManagerImpl ne = new EntradaManagerImpl();
-    Entrada entrada = new Entrada();
-    ArrayList<Entrada> LE = new ArrayList<>();
-    LE = ne.getListado();
+    CargoManagerImpl nc = new CargoManagerImpl();
+    Cargo cargo = new Cargo();
+    ArrayList<Cargo> LC = new ArrayList<>();
+    LC = nc.getListado();
 %>
 <% String Titulo = "Registro de entradas y salidas"; %>
 <%@include file="includes/header.jsp" %>
@@ -30,14 +31,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeC">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        
-                                        </tr>
+                                        <%if(LC!=null){%>
+                                            <%for(Cargo c:LC){%>
+                                                <tr class="gradeC">
+                                                    <td><%=c.getId_cargo()%></td>
+                                                    <td><%=c.getNombre()%></td>
+                                                    <td><%=c.getSalario()%></td>
+                                                    <td><%=c.getEstado()%></td>
+                                                </tr>
+                                            <%}%>
+                                        <%}%>
                                     </tbody>
                                 </table>
                             </div>
@@ -45,26 +48,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <script src="../resources/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="../resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="../resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="../resources/js/sb-admin-2.js"></script>
-        <script src="../resources/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-        <script src="../resources/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-        <script src="../resources/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
-
-        <script src="../resources/dist/js/sb-admin-2.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                $('#dataTables-example').DataTable({
-                responsive: true
-                });
-            });
-        </script>
-
-    </body>
-
-</html>
+<%@include file="includes/footer.jsp" %>

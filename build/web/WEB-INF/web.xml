@@ -9,6 +9,26 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.proyectorat.servlet.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CargoServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.CargoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EntradaServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.EntradaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistroServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.RegistroServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TipoServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.TipoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>com.proyectorat.servlet.UsuarioServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmpleadoServlet</servlet-name>
         <url-pattern>/EmpleadoServlet</url-pattern>
@@ -17,9 +37,34 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargoServlet</servlet-name>
+        <url-pattern>/CargoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EntradaServlet</servlet-name>
+        <url-pattern>/EntradaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistroServlet</servlet-name>
+        <url-pattern>/RegistroServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoServlet</servlet-name>
+        <url-pattern>/TipoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/UsuarioServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
+
 </web-app>
