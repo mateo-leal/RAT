@@ -1,4 +1,3 @@
-
 <%@page import="com.proyectorat.model.Empleado"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.proyectorat.model.Cargo"%>

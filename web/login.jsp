@@ -16,19 +16,18 @@
 
         <title>Registro de actividades y tiempos</title>
 
-        <link rel="icon" href="../resources/images/favicon128.ico" type="image/x-icon"/>
-        <link rel="shorcut icon" href="../resources/images/favicon128.ico" type="image/x-icon"/>
+        <link rel="shorcut icon" href="../resources/images/favicon.png" type="image/png"/>
 
-        <link href="../resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../resources/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="../resources/css/style_login.css" rel="stylesheet">
+        <link href="resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="resources/css/style_login.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
             <div class="row">
-                <form action="validaringreso.jsp" method="post">
+                <form action="Inicio" method="post">
                     <div class="login-form">
-                        <h1><a href="menu.jsp"><img src="../resources/images/logo.png" alt="Pinvalidda" width="250"></a></h1>
+                        <h1><a href="menu.jsp"><img src="../resources/images/favicon.png" alt="ProyectoRAT" width="250"></a></h1>
                         <div class="form-group log-status ">
                             <input type="text" class="form-control" name="user" placeholder="Nombre de usuario" name="usuario" required>
                             <i class="fa fa-user"></i>

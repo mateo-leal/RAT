@@ -5,7 +5,10 @@
  */
 package com.proyectorat.servlet;
 
+import com.proyectorat.manager.UsuarioManagerImpl;
+import com.proyectorat.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,24 +30,49 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    Usuario usuarioVO = new Usuario();
+    UsuarioManagerImpl nu = new UsuarioManagerImpl();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession sesion = request.getSession();
-        String usu, pass;
-        usu = request.getParameter("user");
-        pass = request.getParameter("password");
-        
-        
-        
-        if(usu.equals("admin") && pass.equals("admin") && sesion.getAttribute("user") == null){
-            //si coincide usuario y password y además no hay sesión iniciada
-            sesion.setAttribute("user", usu);
-            //redirijo a página con información de login exitoso
-            response.sendRedirect("index.jsp");
-        }else{
-            response.sendRedirect("login.jsp");
+        PrintWriter out = response.getWriter();
+        try {
+            boolean existeUsuario = false;
+            
+            String user = request.getParameter("user");
+            String password = request.getParameter("password");
+            
+            String usuario = "";
+            String nombre = "";
+            
+            try {
+                usuarioVO = nu.getUsuario(user);
+                if (usuarioVO.getEstado().equals("Activo")) {
+                    if (usuarioVO.getClave().equals(password)) {
+                        existeUsuario = true;
+                        usuario = usuarioVO.getUsuario();
+                        nombre = usuarioVO.getNombre();
+                    }
+                }
+            } catch (Exception e) {
+            }
+            
+            if (existeUsuario) {
+                request.setAttribute("usuario", usuario);
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", usuario);
+                request.setAttribute("nombre", nombre);
+                
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            }
+            out.close();
+        } catch(ServletException | IOException e){
+            out.println(e.toString());
         }
     }
 

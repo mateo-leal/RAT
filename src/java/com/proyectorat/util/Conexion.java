@@ -8,8 +8,6 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    public static boolean ConEstab = false;
-
     public Connection con;
 
     public Conexion() {
@@ -39,12 +37,11 @@ public class Conexion {
     public void ConexionBd() {
         String host = "localhost";
         String puerto = "3306";
-        String mi_db = "db_rat";
+        String mi_db = "db_rat_2";
         String user = "root";
         String pw = "";
         try {
             setCon(DriverManager.getConnection("jdbc:mysql://" + host + ":" + puerto + "/" + mi_db, user, pw));
-            ConEstab = true;
         } catch (SQLException e) {
             System.out.println("SQLException " + e.getMessage());
         } catch (Exception e2) {
@@ -58,10 +55,6 @@ public class Conexion {
         } catch (Exception e) {
             System.out.println("Exception " + e.getMessage());
         }
-    }
-
-    public boolean verificarBD() {
-        return ConEstab;
     }
 
     public static void main(String[] args) {

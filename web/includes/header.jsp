@@ -12,8 +12,7 @@
 
         <title><%=Titulo%></title>
 
-        <link rel="icon" href="resources/images/favicon128.ico" type="image/x-icon"/>
-        <link rel="shorcut icon" href="resources/images/favicon128.ico" type="image/x-icon"/>
+        <link rel="shorcut icon" href="../resources/images/favicon.png" type="image/png"/>
 
         <link href="resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">

@@ -24,8 +24,7 @@
 
         <title>Registro de actividades y tiempos</title>
 
-        <link rel="icon" href="resources/images/favicon128.ico" type="image/x-icon"/>
-        <link rel="shorcut icon" href="resources/images/favicon128.ico" type="image/x-icon"/>
+        <link rel="shorcut icon" href="../resources/images/favicon.png" type="image/png"/>
 
         <link href="resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
@@ -40,7 +39,14 @@
 
             
 
-            <% String user = (String) session.getAttribute("varUsuario");
+            <% //String user = (String) session.getAttribute("usuario");
+                String user = null;
+                String name = null;
+                try{
+                    user = (request.getAttribute("usuario")).toString();
+                    name = (request.getAttribute("nombre")).toString();
+                } catch(Exception e){
+                }
             if (user != null) { %>
 
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -96,18 +102,20 @@
                         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Iniciar sesión</button>
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <form name="loginform" id="loginform" action="LoginServlet" method="POST">
+                                <form name="loginform" id="loginform" action="Inicio" method="POST">
                                     <div class="login-form">
                                         <div class="form-group log-status ">
-                                            <input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" name="user" required>
+                                            <input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" name="user" maxlength="255" required>
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <div class="form-group log-status">
                                             <input type="password" class="form-control" name="password" id="clave" placeholder="Contraseña" required>
                                             <i class="fa fa-lock"></i>
                                         </div>
-                                        <a class="link2" href="registro.php">¿No tienes cuenta?</a>
-                                        <a class="link" href="#">¿Olvidaste tu contraseña?</a>
+                                        <div class="texto">
+                                            <a class="link2" href="registro.php">¿No tienes cuenta?</a>
+                                            <a class="link" href="#">¿Olvidaste tu contraseña?</a>
+                                        </div>
                                         <button type="submit" value="Enviar" name="login" class="btn btn-primary log-btn" >Iniciar sesión</button>
                                         <button type="button" class="btn btn-danger cls-btn" data-dismiss="modal">Cerrar</button>
                                     </div>
