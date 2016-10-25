@@ -28,7 +28,7 @@ public class EntradaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String idempleado = request.getParameter("txtID_Empleado");
-        String consecutivo =request.getParameter("");
+        String consecutivo =request.getParameter("txtConsecutivo");
         String date = request.getParameter("dteFecha");
         String strHora_E = request.getParameter("dteHora_E");
         String strHora_S = request.getParameter("dteHora_S");
@@ -43,12 +43,12 @@ public class EntradaServlet extends HttpServlet {
         if ("buscar".equals(request.getParameter("action"))) {
             try {
                 eysVO = ne.getEntrada(consecutivo);
-                if (!"*".equals(eysVO.getId_empleado())) {
+                if (null != eysVO.getCons()) {
                     request.setAttribute("datos", eysVO);
                 } else {
                     limpiarCampos();
                     request.setAttribute("datos", eysVO);
-                    men = "El empleado "+ consecutivo +" no se encuentra registrado";
+                    men = "El registro "+ consecutivo +" no existe";
                 }
                 
             } catch (Exception e) {
@@ -108,7 +108,7 @@ public class EntradaServlet extends HttpServlet {
         
         if ("eliminar".equals(request.getParameter("action"))) {
             try{
-                ne.getEliminarEntrada(consecutivo,idempleado);
+                ne.getEliminarEntrada(consecutivo);
                         
             }catch (Exception e){
                 men+=""+e.getMessage();

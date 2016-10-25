@@ -23,7 +23,7 @@ public class EmpleadoServlet extends HttpServlet {
         empVO.setDireccion("");
         empVO.setEmail("");
         empVO.setEstado("");
-        empVO.setId_cargo(null);
+        empVO.setId_cargo("");
         
     }
     
@@ -50,8 +50,8 @@ public class EmpleadoServlet extends HttpServlet {
         
         if ("buscar".equals(request.getParameter("action"))) {
             try {
-                empVO = ne.getEmpleado(idempleado);
-                if (!"*".equals(empVO.getId_empleado())) {
+                empVO = ne.getEmpleado(Integer.parseInt(idempleado));
+                if (empVO.getId_empleado() != null) {
                     request.setAttribute("datos", empVO);
                 } else {
                     limpiarCampos();
@@ -59,6 +59,7 @@ public class EmpleadoServlet extends HttpServlet {
                     men = "El empleado "+ idempleado +" no se encuentra registrado";
                 }
             } catch (Exception e) {
+                men = "El ID debe ser solo números";
             }
         }
         
@@ -82,6 +83,8 @@ public class EmpleadoServlet extends HttpServlet {
             empVO.setId_cargo(carg);
             try {
                 ne.getGuardarEmpleado(empVO);
+                limpiarCampos();
+                request.setAttribute("datos", empVO);
             } catch (Exception e) {
                 men+=""+e.getMessage();
                 int tam= men.length();
@@ -104,6 +107,8 @@ public class EmpleadoServlet extends HttpServlet {
             empVO.setId_cargo(carg);
             try {
                 ne.getEditarEmpleado(empVO);
+                limpiarCampos();
+                request.setAttribute("datos",empVO);
             } catch (Exception e) {
                 men+=""+e.getMessage();
                 int tam= men.length();
@@ -121,7 +126,10 @@ public class EmpleadoServlet extends HttpServlet {
         
         if ("eliminar".equals(request.getParameter("action"))) {
             try{
-                ne.getEliminarEmpleado(idempleado);
+                ne.getEliminarEmpleado(Integer.parseInt(idempleado));
+                men+="Se eliminó el empleado " + idempleado;
+                limpiarCampos();
+                request.setAttribute("datos",empVO);
             }catch (Exception e){
                 men+=""+e.getMessage();
                 int tam= men.length();

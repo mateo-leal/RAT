@@ -7,16 +7,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="author" content="RAT">
 
-        <title>Pinvalidda</title>
+        <title>Proyecto RAT</title>
 
-        <link href="../resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-        <link href="../resources/css/timeline.css" rel="stylesheet">
-        <link href="../resources/css/style.css" rel="stylesheet">
-        <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
-        <link href="../resources/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="resources/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+        <link href="resources/css/timeline.css" rel="stylesheet">
+        <link href="resources/css/style.css" rel="stylesheet">
+        <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+        <link href="resources/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     </head>
 
@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.jsp"><img src="../resources/images/logo.png" alt="Pinvalidda" width="130"></a>
+                    <a class="navbar-brand" href="index.jsp"><img src="resources/images/favicon.png" alt="Proyecto RAT" width="130"></a>
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
@@ -151,10 +151,10 @@
                 
             </div>
         </div>
-        <script src="../resources/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="../resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="../resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="../resources/js/sb-admin-2.js"></script>
+        <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="resources/js/sb-admin-2.js"></script>
 
     </body>
 

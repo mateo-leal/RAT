@@ -20,10 +20,16 @@ public class EmpleadoManagerImpl {
         dao = new Dao_Empleado();
     }
 
-    public Empleado getEmpleado(String idempleado) {
+    public Empleado getEmpleado(Integer idEmpleado) {
 
         c = new Conexion().getCon();
-        return dao.getEmpleado(c, Integer.parseInt(idempleado));
+        return dao.getEmpleado(c, idEmpleado);
+    }
+
+    public String getCons() {
+
+        c = new Conexion().getCon();
+        return dao.getCons(c, "tblempleado", "id_empleado", 4);
     }
 
     public ArrayList<Empleado> getListado() {
@@ -33,12 +39,7 @@ public class EmpleadoManagerImpl {
     }
 
     public void getGuardarEmpleado(Empleado u) throws Exception {
-        
-        
-        
-        String emp, tel, car;
-        String mensaje, nom, ape, dir, cor, est;
-        String fec;
+        String emp, tel, car, mensaje, nom, ape, dir, cor, est, fec;
         emp = u.getId_empleado();
         nom = u.getNombre();
         ape = u.getApellidos();
@@ -53,40 +54,51 @@ public class EmpleadoManagerImpl {
         
         //Campos obligatorios
         if (null == emp) {
-            mensaje += "Ingrese usuario";
+            mensaje += "ID del empleado, ";
         }
 
         //Campos no obligatorios
         if ("".equals(dir) || null == dir) {
-            dir = "Activo";
+            dir = "dirección, ";
         }
         
         if ("".equals(nom) || null == nom) {
-            mensaje += "Ingrese nombre";
+            mensaje += "nombre, ";
         }
         
         if ("".equals(ape) || null == ape) {
-            mensaje += "Ingrese clave";
+            mensaje += "apellidos, ";
         }
         
+        if ("".equals(cor) || null == cor) {
+            mensaje += "correo electrónico, ";
+        }
+
         if (null == tel) {
-            mensaje += "Ingrese perfil";
+            mensaje += "teléfono ,";
         }
         
-        //Excepciones
+        if (null == car) {
+            mensaje += "cargo, ";
+        }
+        
+        if ("".equals(fec) || null == fec) {
+            mensaje += "fecha de nacimiento, ";
+        }
+        
+        if (!"".equals(mensaje)) {
+            throw new Exception("Los campos(*): " + mensaje + "son obligatorios.");
+        }
+        c = new Conexion().getCon();
+        mensaje = dao.getGuardarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
+
         if (!"".equals(mensaje)) {
             throw new Exception(mensaje);
         }
-        
-        c= new Conexion().getCon();
-        
-        mensaje = dao.getGuardarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
     }
     
     public void getEditarEmpleado(Empleado u) throws Exception {
-        String emp, tel, car;
-        String mensaje, nom, ape, dir, cor, est;
-        String fec;
+        String emp, tel, car, mensaje, nom, ape, dir, cor, est, fec;
         emp = u.getId_empleado();
         nom = u.getNombre();
         ape = u.getApellidos();
@@ -96,43 +108,57 @@ public class EmpleadoManagerImpl {
         cor = u.getEmail();
         est = u.getEstado();
         car = u.getId_cargo();
+        
         mensaje = "";
+        
         //Campos obligatorios
         if (null == emp) {
-            mensaje += "Ingrese usuario";
+            mensaje += "ID del empleado, ";
         }
 
         //Campos no obligatorios
-        if ("".equals(est) || null == est) {
-            est = "Activo";
+        if ("".equals(dir) || null == dir) {
+            dir = "dirección, ";
         }
         
         if ("".equals(nom) || null == nom) {
-            mensaje += "Ingrese nombre";
+            mensaje += "nombre, ";
         }
         
         if ("".equals(ape) || null == ape) {
-            mensaje += "Ingrese clave";
+            mensaje += "apellidos, ";
         }
         
+        if ("".equals(cor) || null == cor) {
+            mensaje += "correo electrónico, ";
+        }
+
         if (null == tel) {
-            mensaje += "Ingrese perfil";
+            mensaje += "teléfono ,";
         }
         
-        //Excepciones
+        if (null == car) {
+            mensaje += "cargo, ";
+        }
+        
+        if ("".equals(fec) || null == fec) {
+            mensaje += "fecha de nacimiento, ";
+        }
+        
+        if (!"".equals(mensaje)) {
+            throw new Exception("Los campos(*): " + mensaje + "son obligatorios.");
+        }
+        c = new Conexion().getCon();
+        mensaje = dao.getEditarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
+
         if (!"".equals(mensaje)) {
             throw new Exception(mensaje);
         }
-        
-        c= new Conexion().getCon();
-        
-        mensaje = dao.getEditarEmpleado(c, Integer.parseInt(emp), nom, ape, Date.valueOf(fec), Integer.parseInt(tel), dir, cor, est, Integer.parseInt(car));
     }
     
-    public Empleado getEliminarEmpleado(String idempleado) {
+    public Empleado getEliminarEmpleado(Integer idEmpleado) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarEmpleado(c, Integer.parseInt(idempleado));
+        return dao.getEliminarEmpleado(c, idEmpleado);
     }
-    
 }

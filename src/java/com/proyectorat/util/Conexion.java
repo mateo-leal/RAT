@@ -37,7 +37,7 @@ public class Conexion {
     public void ConexionBd() {
         String host = "localhost";
         String puerto = "3306";
-        String mi_db = "db_rat_2";
+        String mi_db = "db_rat";
         String user = "root";
         String pw = "";
         try {

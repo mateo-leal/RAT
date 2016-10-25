@@ -39,14 +39,14 @@
 
             
 
-            <% //String user = (String) session.getAttribute("usuario");
-                String user = null;
-                String name = null;
+            <% String user = null;
+                user = (String) session.getAttribute("usuario");
+                /* String name = null;
                 try{
                     user = (request.getAttribute("usuario")).toString();
                     name = (request.getAttribute("nombre")).toString();
                 } catch(Exception e){
-                }
+                }*/
             if (user != null) { %>
 
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -82,11 +82,11 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span><?php echo $_SESSION['session_nombre'] . "    ";?><i class="fa fa-user fa-fw"></i></span><i class="fa fa-caret-down"></i>
+                            <span><%=user%><i class="fa fa-user fa-fw"></i></span><i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="modificar-perfil.php"><i class="fa fa-gear fa-fw"></i> Modificar perfil</a></li>
-                            <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a></li>
+                            <li><a href="Modificar_perfil"><i class="fa fa-gear fa-fw"></i> Modificar perfil</a></li>
+                            <li><a href="Logout"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -123,7 +123,12 @@
                             </div>
                         </div>
                     <% } else { %>
-                        <a href="principal.php" class="btn btn-default">Principal </a>
+                        <a href="registro-user.jsp" class="btn btn-default">Usuarios </a>
+                        <a href="registro-employee.jsp" class="btn btn-default">Empleados </a>
+                        <a href="registro-inandout.jsp" class="btn btn-default">Entradas y salidas </a>
+                        <a href="registro-charges.jsp" class="btn btn-default">Cargos </a>
+                        <a href="registro-activitis.jsp" class="btn btn-default">Asignación de actividades </a>
+                        <a href="registro-types.jsp" class="btn btn-default">Registro de actividades</a>
                         <a href="http://mega.co.nz/" class="btn btn-default">Descarga la aplicación de escritorio</a>
                     <% } %>
                     </div>

@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author RAT
@@ -62,16 +60,16 @@ public class Dao_Empleado {
             stm.setInt(9, car);
             stm.execute();
             if (stm.getUpdateCount() > 0) {
-                JOptionPane.showMessageDialog(null, "Empleado " + emp + " añadido");
+                res = "Empleado " + emp + " añadido";
             } else {
-                JOptionPane.showMessageDialog(null, "Empleado " + emp + " no añadido", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "Empleado " + emp + " no añadido";
             }
         } catch (SQLException | HeadlessException e) {
             
             res = "" + e.getCause();
             res= res.replace("#","");
             if (res.equals("23000")) {
-                JOptionPane.showMessageDialog(null, "El empleado " + emp + " ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                res = "El empleado " + emp + " ya existe.";
             }
         } finally {
             try {
@@ -90,14 +88,14 @@ public class Dao_Empleado {
            /*     return "UPDATE tblempleado SET nombre=?, apellidos=?, fecha_n=?, telefono=?, direccion=?, email=?, estado=?, id_cargo=? WHERE id_empleado=?";
  */
             stm.setInt(9, emp);
-            stm.setInt(1, emp);
-            stm.setString(2, nom);
-            stm.setString(3, ape);
-            stm.setDate(4, fec);
-            stm.setInt(5, tel);
-            stm.setString(6, dir);
-            stm.setString(7, cor);
-            stm.setString(8, est);
+            stm.setString(1, nom);
+            stm.setString(2, ape);
+            stm.setDate(3, fec);
+            stm.setInt(4, tel);
+            stm.setString(5, dir);
+            stm.setString(6, cor);
+            stm.setString(7, est);
+            stm.setInt(8, car);
             stm.executeUpdate();
             if (stm.getUpdateCount() > 0) {
                 res = "Empleado " + emp + " actualizado";
@@ -182,6 +180,24 @@ public class Dao_Empleado {
         try {
             PreparedStatement smt = c.prepareStatement(SQL_Helpers.getEliminarEmpleado(idempleado));
             smt.executeUpdate();
+        } catch (Exception e) {
+        } finally {
+            try {
+                c.close();
+            } catch (Exception e) {
+            }
+        }
+        return u;
+    }
+
+    public String getCons (Connection c, String tabla, String campo, int Longitud) {
+        String u = "1000";
+        try {
+            PreparedStatement smt = c.prepareStatement(SQL_Helpers.getConsectivo(tabla, campo, Longitud));
+            ResultSet r = smt.executeQuery();
+            while (r.next()) {
+                u=r.getString(1);
+            }
         } catch (Exception e) {
         } finally {
             try {

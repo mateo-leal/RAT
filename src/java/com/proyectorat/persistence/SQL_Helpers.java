@@ -1,5 +1,6 @@
 package com.proyectorat.persistence;
 
+import java.sql.Blob;
 import java.sql.Date;
 
 public class SQL_Helpers {
@@ -37,13 +38,13 @@ public class SQL_Helpers {
     }
     
     public static String getEliminarUsuario(String id){
-        return "DELETE FROM tblusuario WHERE usuario='"+ id +"' ";
+        return "DELETE FROM tblusuario WHERE usuario='"+ id +"'";
     }
 
     
     //CARGO
     public static String getCargo() {
-        return "SELECT id_cargo, nombre, salario, estado FROM tblcargo ";
+        return "SELECT id_cargo, cargo, salario, estado FROM tblcargo";
     }
 
     public static String getCargo(Integer id) {
@@ -67,7 +68,7 @@ public class SQL_Helpers {
     }
     
     public static String getEliminarCargo(Integer id){
-        return "DELETE FROM tblcargo WHERE id_cargo='"+ id +"' ";
+        return "DELETE FROM tblcargo WHERE id_cargo='"+ id +"'";
     }
 
     //EMPLEADO
@@ -87,8 +88,8 @@ public class SQL_Helpers {
         return "UPDATE tblempleado SET nombre=?, apellidos=?, fecha_n=?, telefono=?, direccion=?, email=?, estado=?, id_cargo=? WHERE id_empleado=?";
     }
 
-    public static String getInsertarEmpleado(Integer id_empleado, String nombre, String apellidos, Date fecha_n, Integer telefono, String direccion, String email, String estado, Integer id_cargo) {
-        return "INSERT INTO tblempleado( id_empleado, nombre, apellidos, fecha_n, telefono, direccion, email, estado, id_cargo) values (" + id_empleado + "," + nombre + "," + apellidos + "," + fecha_n + "," + telefono + "," + direccion + "," + email + "," + estado + "," + id_cargo + ")";
+    public static String getInsertarEmpleado(Integer id_empleado, String nombre, String apellidos, Date fecha_n, Integer telefono, String direccion, String email, String estado, Integer idCargo) {
+        return "INSERT INTO tblempleado( id_empleado, nombre, apellidos, fecha_n, telefono, direccion, email, estado, id_cargo) values (" + id_empleado + "," + nombre + "," + apellidos + "," + fecha_n + "," + telefono + "," + direccion + "," + email + "," + estado + "," + idCargo + ")";
     }
 
     public static String getInsertarEmpleado() {
@@ -96,17 +97,16 @@ public class SQL_Helpers {
     }
     
     public static String getEliminarEmpleado(Integer id){
-        return "DELETE FROM tblempleado WHERE id_empleado='"+ id +"' ";
+        return "DELETE FROM tblempleado WHERE id_empleado='"+ id +"'";
     }
-    
 
     //ENTRADAS
     public static String getEntrada() {
-        return "SELECT em.nombre, em.apellidos, es.cons, TIME_FORMAT(es.hora_entrada,'%r') hora_entrada, TIME_FORMAT(es.hora_salida,'%r') hora_salida, es.fecha FROM tblentrada_salida es INNER JOIN tblempleado em ON es.id_empleado = em.id_empleado GROUP BY em.nombre, es.cons";
+        return "SELECT es.id_empleado, CONCAT(em.nombre, ' ', em.apellidos) nombre, es.cons, TIME_FORMAT(es.hora_entrada,'%r') hora_entrada, TIME_FORMAT(es.hora_salida,'%r') hora_salida, es.fecha FROM tblentrada_salida es INNER JOIN tblempleado em ON es.id_empleado = em.id_empleado GROUP BY em.nombre, es.cons";
     }
 
     public static String getEntrada(Integer id) {
-        return "SELECT id_empleado, cons, hora_entrada, hora_salida, fecha FROM tblentrada_salida WHERE id_empleado = '" + id + "' ";
+        return "SELECT id_empleado, cons, hora_entrada, hora_salida, fecha FROM tblentrada_salida WHERE cons = '" + id + "'";
     }
     
     public static String getEntrada_Cons(Integer id, Integer emp) {
@@ -118,7 +118,7 @@ public class SQL_Helpers {
     }
 
     public static String getActualizarES() {
-        return "UPDATE tblentrada_salida SET hora_entrada=?, hora_salida=?, fecha=? WHERE id_empleado=? AND cons=?";
+        return "UPDATE tblentrada_salida SET id_empleado=?, hora_entrada=?, hora_salida=?, fecha=? WHERE cons=?";
     }
 
     public static String getInsertarEntrada(Integer id_empleado, Integer cons, Date hora_entrada, Date hora_salida, Date fecha) {
@@ -129,14 +129,14 @@ public class SQL_Helpers {
         return "INSERT INTO tblentrada_salida( id_empleado, cons, hora_entrada, hora_salida, fecha) values (?,?,?,?,?)";
     }
     
-    public static String getEliminarEntrada(Integer id, Integer emp){
-        return "DELETE FROM tblentrada_salida WHERE cons='"+ id +"' AND id_empleado='"+ emp +"' ";
+    public static String getEliminarEntrada(Integer id){
+        return "DELETE FROM tblentrada_salida WHERE cons='"+ id +"'";
     }
     
     
     //REGISTROA
     public static String getRegistroA() {
-        return "SELECT em.nombre, em.apellidos, ti.descripcion, us.usuario, ac.fecha_actividad, ac.estado FROM tblregistro_actividades ac INNER JOIN tblempleado em ON ac.id_empleado = em.id_empleado INNER JOIN tbltipo_actividad ti ON ac.id_actividad = ti.id_actividad INNER JOIN tblusuario us ON us.usuario = ac.usuario_creador GROUP BY em.nombre, ti.descripcion, us.usuario, ac.fecha_actividad";
+        return "SELECT ac.cons, CONCAT(em.nombre, ' ', em.apellidos) nombre, ti.actividad, us.usuario, ac.fecha_actividad, ac.estado FROM tblregistro_actividades ac INNER JOIN tblempleado em ON ac.id_empleado = em.id_empleado INNER JOIN tbltipo_actividad ti ON ac.id_actividad = ti.id_actividad INNER JOIN tblusuario us ON us.usuario = ac.usuario_creador GROUP BY em.nombre, ti.descripcion, us.usuario, ac.fecha_actividad";
     }
 
     public static String getRegistroA_E(Integer id) {
@@ -152,11 +152,11 @@ public class SQL_Helpers {
     }
 
     public static String getActualizarRA() {
-        return "UPDATE tblregistro_actividades SET cons=?, id_actividad=?, usuario_creador=?, fecha_actividad=?, estado=? WHERE id_empleado=?";
+        return "UPDATE tblregistro_actividades SET cons=?, id_actividad=?, usuario_creador=?, fecha_actividad=?, estado=? WHERE id_empleado=? ";
     }
 
     public static String getInsertarRegistroA(Integer id_empleado, Integer cons, Integer id_actividad, String usuario_creador, Date fecha_actividad, String estado) {
-        return "INSERT INTO tblregistro_actividades( id_empleado, cons, id_actividad, usuario_creador, fecha_actividad, estado) values (" + id_empleado + "," + cons + "," + id_actividad + "," + usuario_creador + "," + fecha_actividad + "," + estado + ")";
+        return "INSERT INTO tblregistro_actividades( id_empleado, cons, id_actividad, usuario_creador, fecha_actividad, estado) values (" + id_empleado + "," + cons + "," + id_actividad + "," + usuario_creador + "," + fecha_actividad + "," + estado + " )";
     }
 
     public static String getInsertarRegistroA() {
@@ -170,11 +170,11 @@ public class SQL_Helpers {
 
     //TIPOA
     public static String getTipoA() {
-        return "SELECT id_actividad, actividad, descripcion, estado FROM tbltipo_actividad ";
+        return "SELECT id_actividad, actividad, descripcion, estado FROM tbltipo_actividad";
     }
 
     public static String getTipoA(Integer id) {
-        return "SELECT id_actividad, actividad, descripcion, estado FROM tbltipo_actividad WHERE id_actividad = '" + id + "' ";
+        return "SELECT id_actividad, actividad, descripcion, estado FROM tbltipo_actividad WHERE id_actividad = '" + id + "'";
     }
     
     public static String getTipoA(String campo, String valor) {
@@ -185,8 +185,8 @@ public class SQL_Helpers {
         return "UPDATE tbltipo_actividad SET actividad=?, descripcion=?, estado=? WHERE id_actividad=?";
     }
 
-    public static String getInsertarTipoA(Integer id_actividad, String actividad, String descripcion, String estado) {
-        return "INSERT INTO tbltipo_actividad( id_actividad, actividad, descripcion, estado) values (" + id_actividad + "," + actividad + "," + descripcion + "," + estado + ")";
+    public static String getInsertarTipoA(Integer idActividad, String actividad, String descripcion, String estado) {
+        return "INSERT INTO tbltipo_actividad( id_actividad, actividad, descripcion, estado) values (" + idActividad + "," + actividad + "," + descripcion + "," + estado + ")";
     }
 
     public static String getInsertarTipoA() {

@@ -5,8 +5,7 @@
 <%
     EmpleadoManagerImpl ne = new EmpleadoManagerImpl();
     Empleado empleado = new Empleado();
-    ArrayList<Empleado> LE = new ArrayList<>();
-    LE = ne.getListado();
+    ArrayList<Empleado> LE = ne.getListado();
 %>
 <% String Titulo = "Registro de empleados"; %>
 <%@include file="includes/header.jsp" %>

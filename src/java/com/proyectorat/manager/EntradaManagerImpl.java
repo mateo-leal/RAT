@@ -58,30 +58,33 @@ public class EntradaManagerImpl {
 
         //Campos obligatorios
         if ("".equals(emp) || null == emp) {
-            mensaje += "Ingrese usuario";
+            mensaje += "usuario, ";
         }
         //Campos no obligatorios
         
         if (null == fec) {
-            mensaje += "\nIngrese fecha";
+            mensaje += "fecha, ";
         }
         
         if ("".equals(hoe) || null == hoe) {
-            mensaje += "\nIngrese hora de entrada";
+            mensaje += "hora de entrada, ";
         }
         
         if ("".equals(hos) || null == hos) {
-            mensaje += "\nIngrese hora de salida";
+            mensaje += "hora de salida, ";
         }
         
         //Excepciones
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            throw new Exception("Los campos(*): " + mensaje + "son obligatorios");
         }
         
         c= new Conexion().getCon();
         
         mensaje = dao.getGuardarEntrada(c, Integer.parseInt(emp), Integer.parseInt(con), Date.valueOf(hoe), Date.valueOf(hos), Date.valueOf(fec));
+        if (!"".equals(mensaje)) {
+            throw new Exception(mensaje);
+        }
     }
     
     public void getEditarEntrada(Entrada u) throws Exception {
@@ -98,35 +101,38 @@ public class EntradaManagerImpl {
 
         //Campos obligatorios
         if ("".equals(emp) || null == emp) {
-            mensaje += "Ingrese usuario";
+            mensaje += "usuario, ";
         }
         //Campos no obligatorios
         
         if (null == fec) {
-            mensaje += "\nIngrese fecha";
+            mensaje += "fecha, ";
         }
         
         if ("".equals(hoe) || null == hoe) {
-            mensaje += "\nIngrese hora de entrada";
+            mensaje += "hora de entrada, ";
         }
         
         if ("".equals(hos) || null == hos) {
-            mensaje += "\nIngrese hora de salida";
+            mensaje += "hora de salida, ";
         }
         
         //Excepciones
         if (!"".equals(mensaje)) {
-            throw new Exception(mensaje);
+            throw new Exception("Los campos(*): " + mensaje + "son obligatorios");
         }
         
         c= new Conexion().getCon();
         
         mensaje = dao.getEditarEntrada(c, Integer.parseInt(emp), Integer.parseInt(con), Date.valueOf(hoe), Date.valueOf(hos), Date.valueOf(fec));
+        if (!"".equals(mensaje)) {
+            throw new Exception(mensaje);
+        }
     }
     
-    public Entrada getEliminarEntrada(String cons, String idempleado) {
+    public Entrada getEliminarEntrada(String cons) {
 
         c = new Conexion().getCon();
-        return dao.getEliminarEntrada(c, Integer.parseInt(cons), Integer.parseInt(idempleado));
+        return dao.getEliminarEntrada(c, Integer.parseInt(cons));
     }
 }

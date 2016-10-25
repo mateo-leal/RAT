@@ -1,20 +1,13 @@
 package com.proyectorat.model;
 
+import java.sql.Date;
+
 public class Entrada {
 
-    private String id_empleado, cons;
-    private String hora_entrada, hora_salida, fecha;
+    private String id_empleado, cons, hora_entrada, hora_salida, nombre, fecha;
 
     public Entrada() {
 
-    }
-    
-    public Entrada(String id_empleado, String cons, String hora_entrada, String hora_salida, String fecha) {
-        this.id_empleado = id_empleado;
-        this.cons = cons;
-        this.hora_entrada = hora_entrada;
-        this.fecha = fecha;
-        this.hora_salida = hora_salida;
     }
     
     public String getId_empleado() {
@@ -57,4 +50,13 @@ public class Entrada {
     public void setHora_salida(String hora_salida) {
         this.hora_salida = hora_salida;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
 }

@@ -11,24 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 public class CargoServlet extends HttpServlet {
     
     Cargo carVO = new Cargo();
-    CargoManagerImpl nc = new CargoManagerImpl();
+    CargoManagerImpl ne = new CargoManagerImpl();
 
     public void limpiarCampos(){
 
-        carVO.setId_cargo(null);
+        carVO.setId_cargo("");
         carVO.setNombre("");
         carVO.setSalario("");
         carVO.setEstado("");
+        
     }
     
     protected void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
 
-        String idcargo = request.getParameter("txtID_Cargo");
-        String name = request.getParameter("txtNombre");
+        String idCargo = request.getParameter("txtIdCargo");
+        String cargo = request.getParameter("txtNombre");
         String salario = request.getParameter("txtSalario");
-        String status = request.getParameter("cmbEstado");
+        String estado = request.getParameter("cmbEstado");
         
         String modulo = "registro-charges.jsp";
         String men = "";
@@ -39,35 +40,63 @@ public class CargoServlet extends HttpServlet {
         
         if ("buscar".equals(request.getParameter("action"))) {
             try {
-                carVO = nc.getCargo(idcargo);
-                if (!"*".equals(carVO.getId_cargo())) {
+                carVO = ne.getCargo(idCargo);
+                if (carVO.getId_cargo()!= null) {
                     request.setAttribute("datos", carVO);
                 } else {
                     limpiarCampos();
                     request.setAttribute("datos", carVO);
-                    men = "El cargo "+ idcargo +" no se encuentra registrado";
+                    men = "El cargo "+ idCargo +" no se encuentra registrado";
                 }
             } catch (Exception e) {
+                men = "El ID debe ser solo números";
             }
         }
         
         if ("todos".equals(request.getParameter("action"))) {
             try {
-                request.setAttribute("listado", nc.getListado());
+                request.setAttribute("listado", ne.getListado());
             } catch (Exception e) {
                 request.setAttribute("listado", null);
             }
         }
         
         if ("guardar".equals(request.getParameter("action"))) {
-            carVO.setId_cargo(idcargo);
-            carVO.setNombre(name);
+            carVO.setId_cargo(idCargo);
+            carVO.setNombre(cargo);
             carVO.setSalario(salario);
-            carVO.setEstado(status);
+            carVO.setEstado(estado);
+            try {
+                ne.getGuardarCargo(carVO);
+                limpiarCampos();
+                request.setAttribute("datos", carVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",carVO);
+                }
+            }
         }
         
         if ("editar".equals(request.getParameter("action"))) {
-            men = "implementar editar";
+            carVO.setId_cargo(idCargo);
+            carVO.setNombre(cargo);
+            carVO.setSalario(salario);
+            carVO.setEstado(estado);
+            try {
+                ne.getEditarCargo(carVO);
+                limpiarCampos();
+                request.setAttribute("datos",carVO);
+            } catch (Exception e) {
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",carVO);
+                }
+            }
         }
         
         if ("cancelar".equals(request.getParameter("action"))) {
@@ -76,7 +105,20 @@ public class CargoServlet extends HttpServlet {
         }
         
         if ("eliminar".equals(request.getParameter("action"))) {
-            men = "implementar eliminar";
+            try{
+                ne.getEliminarCargo(idCargo);
+                men+="Se eliminó el cargo " + idCargo;
+                limpiarCampos();
+                request.setAttribute("datos",carVO);
+            }catch (Exception e){
+                men+=""+e.getMessage();
+                int tam= men.length();
+                if(men.substring(tam-1, tam).equals("!")){
+                    limpiarCampos();
+                    request.setAttribute("datos",carVO);
+                }
+            }
+            
         }
         
         request.setAttribute("mensajes", men);
