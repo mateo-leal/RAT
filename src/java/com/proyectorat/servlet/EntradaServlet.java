@@ -69,35 +69,35 @@ public class EntradaServlet extends HttpServlet {
             eysVO.setFecha(date);
             eysVO.setHora_entrada(strHora_E);
             eysVO.setHora_salida(strHora_S);
-            
+           
+           
             try {
                 ne.getGuardarEntrada(eysVO);
             } catch (Exception e) {
-                men+=""+e.getMessage();
-                int tam= men.length();
+              men+=""+e.getMessage();
+              
+              int tam= men.length();
                 if(men.substring(tam-1, tam).equals("!")){
                     limpiarCampos();
                     request.setAttribute("datos",eysVO);
                 }
             }
         }
-        
         if ("editar".equals(request.getParameter("action"))) {
-            eysVO.setCons(consecutivo);
+           eysVO.setCons(consecutivo);
             eysVO.setId_empleado(idempleado);
             eysVO.setFecha(date);
             eysVO.setHora_entrada(strHora_E);
             eysVO.setHora_salida(strHora_S);
-            
             try {
                 ne.getEditarEntrada(eysVO);
             } catch (Exception e) {
-                men+=""+e.getMessage();
+               men+=""+e.getMessage();
                 int tam= men.length();
                 if(men.substring(tam-1, tam).equals("!")){
                     limpiarCampos();
                     request.setAttribute("datos",eysVO);
-                }
+                   }
             }
         }
         
@@ -119,6 +119,11 @@ public class EntradaServlet extends HttpServlet {
                 }
             }
             
+        }
+        
+        if ("cancelar".equals(request.getParameter("action"))) {
+            limpiarCampos();
+            request.setAttribute("datos", eysVO);
         }
         
         request.setAttribute("mensajes", men);
