@@ -1,6 +1,7 @@
 
 package com.proyectorat.servlet;
 
+import com.proyectorat.manager.MD5;
 import com.proyectorat.manager.UsuarioManagerImpl;
 import com.proyectorat.model.Usuario;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             boolean existeUsuario = false;
             
             String user = request.getParameter("user");
-            String password = request.getParameter("password");
+            String password = MD5.encriptMD5(request.getParameter("password"));
             
             String usuario = "";
             String nombre = "";

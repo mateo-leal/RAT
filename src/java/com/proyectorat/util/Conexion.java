@@ -39,7 +39,7 @@ public class Conexion {
         String puerto = "3306";
         String mi_db = "db_rat";
         String user = "root";
-        String pw = "";
+        String pw = "1215";
         try {
             setCon(DriverManager.getConnection("jdbc:mysql://" + host + ":" + puerto + "/" + mi_db, user, pw));
         } catch (SQLException e) {

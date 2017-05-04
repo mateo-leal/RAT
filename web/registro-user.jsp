@@ -1,9 +1,9 @@
 
-<%@page import="com.pinvalidda.business.UsuarioManagerImpl"%>
+<%@page import="com.proyectorat.manager.UsuarioManagerImpl"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.pinvalidda.model.Cargo"%>
-<%@page import="com.pinvalidda.business.CargoManagerImpl"%>
-<%@page import="com.pinvalidda.model.Usuario"%>
+<%@page import="com.proyectorat.model.Cargo"%>
+<%@page import="com.proyectorat.manager.CargoManagerImpl"%>
+<%@page import="com.proyectorat.model.Usuario"%>
 <%
     CargoManagerImpl nc = new CargoManagerImpl();
     Cargo cargo = new Cargo();

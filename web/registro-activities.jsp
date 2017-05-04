@@ -1,5 +1,5 @@
-
-
+<% String Titulo = "Actividades";%>
+<%@include file="includes/header.jsp" %>
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
@@ -50,3 +50,4 @@
                     </div>
                 </div>
             </div>
+<%@include file="includes/footer.jsp" %>
